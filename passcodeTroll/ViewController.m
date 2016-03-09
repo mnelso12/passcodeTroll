@@ -27,6 +27,18 @@ UIView *dot2;
 UIView *dot3;
 UIView *dot4;
 
+UIView *one;
+UIView *two;
+UIView *three;
+UIView *four;
+UIView *five;
+UIView *six;
+UIView *seven;
+UIView *eight;
+UIView *nine;
+UIView *zero;
+
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -162,15 +174,79 @@ UIView *dot4;
         dot4.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
         dot4.layer.borderWidth = 0;
     }
-git a
 }
 
-- (void)tapAction:(UITapGestureRecognizer *)gesture
+- (void)tapAction0:(UITapGestureRecognizer *)gesture
 {
-    NSLog(@"%ld", (long)[gesture view].tag);
+    NSLog(@"0");
     numEntered++;
     [self updateDots];
 }
+
+- (void)tapAction1:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"1");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction2:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"2");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction3:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"3");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction4:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"4");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction5:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"5");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction6:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"6");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction7:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"7");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction8:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"8");
+    numEntered++;
+    [self updateDots];
+}
+
+- (void)tapAction9:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"9");
+    numEntered++;
+    [self updateDots];
+}
+
+
 - (void)loadKeypad
 {
     int i = 0;
@@ -178,7 +254,7 @@ git a
     int count = 1;
     float a = (2*buttonRadius+buttonDist);
     
-    
+    /*
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
@@ -201,12 +277,12 @@ git a
             [self.view addSubview:one];
         }
     }
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    */
+    UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction0:)];
     UIView *zero = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+3*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
     zero.tag = 0;
     zero.userInteractionEnabled = YES;
-    [zero addGestureRecognizer:tap];
+    [zero addGestureRecognizer:tap0];
     zero.layer.cornerRadius = buttonRadius;
     zero.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     zero.layer.borderWidth = 1;
@@ -218,8 +294,29 @@ git a
     [zero addSubview:zeroLabel];
     [self.view addSubview:zero];
     
-    /*
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction1:)];
+    UIView *one = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-(2*buttonRadius+buttonDist), sh*.23, 2*buttonRadius, 2*buttonRadius)];
+    one.layer.cornerRadius = buttonRadius;
+    one.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    one.layer.borderWidth = 1;
+    UILabel *oneLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
+    oneLabel.text = [NSString stringWithFormat:@"%i", count];
+    one.tag = count;
+    one.userInteractionEnabled = YES;
+    [one addGestureRecognizer:tap1];
+    count++;
+    oneLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    [oneLabel setFont:[UIFont fontWithName:myFont size:32]];
+    oneLabel.textAlignment = NSTextAlignmentCenter;
+    [one addSubview:oneLabel];
+    [self.view addSubview:one];
+
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction2:)];
     UIView *two = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23, 2*buttonRadius, 2*buttonRadius)];
+    two.tag = count;
+    two.userInteractionEnabled = YES;
+    [two addGestureRecognizer:tap2];
     two.layer.cornerRadius = buttonRadius;
     two.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     two.layer.borderWidth = 1;
@@ -231,7 +328,10 @@ git a
     [two addSubview:twoLabel];
     [self.view addSubview:two];
     
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction3:)];
     UIView *three = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius+(2*buttonRadius+buttonDist), sh*.23, 2*buttonRadius, 2*buttonRadius)];
+    three.userInteractionEnabled = YES;
+    [three addGestureRecognizer:tap3];
     three.layer.cornerRadius = buttonRadius;
     three.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     three.layer.borderWidth = 1;
@@ -245,8 +345,10 @@ git a
     
     
     
-    
+    UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction4:)];
     UIView *four = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-(2*buttonRadius+buttonDist), sh*.23+(2*buttonRadius+20), 2*buttonRadius, 2*buttonRadius)];
+    four.userInteractionEnabled = YES;
+    [four addGestureRecognizer:tap4];
     four.layer.cornerRadius = buttonRadius;
     four.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     four.layer.borderWidth = 1;
@@ -258,7 +360,11 @@ git a
     [four addSubview:fourLabel];
     [self.view addSubview:four];
     
+    
+    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction5:)];
     UIView *five = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    five.userInteractionEnabled = YES;
+    [five addGestureRecognizer:tap5];
     five.layer.cornerRadius = buttonRadius;
     five.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     five.layer.borderWidth = 1;
@@ -270,7 +376,10 @@ git a
     [five addSubview:fiveLabel];
     [self.view addSubview:five];
     
+    UITapGestureRecognizer *tap6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction6:)];UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     UIView *six = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius+(2*buttonRadius+buttonDist), sh*.23+(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    six.userInteractionEnabled = YES;
+    [six addGestureRecognizer:tap6];
     six.layer.cornerRadius = buttonRadius;
     six.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     six.layer.borderWidth = 1;
@@ -286,8 +395,10 @@ git a
     
     
     
-    
+    UITapGestureRecognizer *tap7 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction7:)];
     UIView *seven = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-(2*buttonRadius+20), sh*.23+2*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    seven.userInteractionEnabled = YES;
+    [seven addGestureRecognizer:tap7];
     seven.layer.cornerRadius = buttonRadius;
     seven.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     seven.layer.borderWidth = 1;
@@ -299,7 +410,10 @@ git a
     [seven addSubview:sevenLabel];
     [self.view addSubview:seven];
     
+    UITapGestureRecognizer *tap8 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction8:)];
     UIView *eight = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+2*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    eight.userInteractionEnabled = YES;
+    [eight addGestureRecognizer:tap8];
     eight.layer.cornerRadius = buttonRadius;
     eight.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     eight.layer.borderWidth = 1;
@@ -311,7 +425,10 @@ git a
     [eight addSubview:eightLabel];
     [self.view addSubview:eight];
     
+    UITapGestureRecognizer *tap9 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction9:)];
     UIView *nine = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius+(2*buttonRadius+buttonDist), sh*.23+2*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    nine.userInteractionEnabled = YES;
+    [nine addGestureRecognizer:tap9];
     nine.layer.cornerRadius = buttonRadius;
     nine.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     nine.layer.borderWidth = 1;
@@ -322,7 +439,6 @@ git a
     nineLabel.textAlignment = NSTextAlignmentCenter;
     [nine addSubview:nineLabel];
     [self.view addSubview:nine];
- */
     
 
 }
