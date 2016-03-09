@@ -84,8 +84,10 @@ UIView *zero;
     [emergency setFont:[UIFont fontWithName:myFont size:14]];
     [self.view addSubview:emergency];
     
-    
+    UITapGestureRecognizer *delTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delTap:)];
     UILabel *cancel= [[UILabel alloc] initWithFrame:CGRectMake(cancelCenter-sw/6, sh-7*dotRadius, sw/3, 4*dotRadius)];
+    cancel.userInteractionEnabled = YES;
+    [cancel addGestureRecognizer:delTap];
     cancel.text = @"Delete";
     cancel.textColor = [UIColor whiteColor];
     cancel.textAlignment = NSTextAlignmentCenter;
@@ -210,9 +212,9 @@ UIView *zero;
     [animation setRepeatCount:3];
     [animation setAutoreverses:YES];
     [animation setFromValue:[NSValue valueWithCGPoint:
-                             CGPointMake([dotsView center].x - 30.0f, [dotsView center].y)]];
+                             CGPointMake([dotsView center].x - 35.0f, [dotsView center].y)]];
     [animation setToValue:[NSValue valueWithCGPoint:
-                           CGPointMake([dotsView center].x + 30.0f, [dotsView center].y)]];
+                           CGPointMake([dotsView center].x + 35.0f, [dotsView center].y)]];
     [[dotsView layer] addAnimation:animation forKey:@"position"];
     
     // reset number backgrounds
@@ -266,6 +268,19 @@ UIView *zero;
     nine.layer.borderWidth = 1;
     nine.backgroundColor = [UIColor clearColor];
 
+}
+
+- (void)delTap:(UITapGestureRecognizer *)gesture
+{
+    if (numEntered >= 1)
+    {
+        numEntered--;
+    }
+    else
+    {
+        numEntered = 0;
+    }
+    [self updateDots];
 }
 
 - (void)tapAction0:(UITapGestureRecognizer *)gesture
