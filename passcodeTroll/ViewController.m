@@ -39,6 +39,8 @@ UIView *eight;
 UIView *nine;
 UIView *zero;
 
+CABasicAnimation *fade;
+
 
 @implementation ViewController
 
@@ -55,6 +57,11 @@ UIView *zero;
     
     [self setNeedsStatusBarAppearanceUpdate];
     [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:.2 alpha:.65]];
+    
+    fade = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    fade.fromValue = (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    fade.toValue = (id)[UIColor clearColor].CGColor;
+    [fade setDuration:.5];
 
     [self loadKeypad];
     [self loadDots];
@@ -223,7 +230,7 @@ UIView *zero;
     // reset dot backgrounds
     numEntered = 0;
     [self updateDots];
-
+    
 }
 
 - (void)resetNumBackgrounds
@@ -287,9 +294,11 @@ UIView *zero;
 {
     NSLog(@"0");
     [self resetNumBackgrounds];
-    zero.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //zero.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     zero.layer.borderWidth = 0;
+    [one.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    zero.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -297,9 +306,11 @@ UIView *zero;
 {
     NSLog(@"1");
     [self resetNumBackgrounds];
-    one.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //one.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     one.layer.borderWidth = 0;
     numEntered++;
+    [one.layer addAnimation:fade forKey:@"fadeAnimation"];
+    one.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -307,9 +318,11 @@ UIView *zero;
 {
     NSLog(@"2");
     [self resetNumBackgrounds];
-    two.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //two.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     two.layer.borderWidth = 0;
+    [two.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    two.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -317,9 +330,11 @@ UIView *zero;
 {
     NSLog(@"3");
     [self resetNumBackgrounds];
-    three.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //three.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     three.layer.borderWidth = 0;
+    [three.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    three.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -327,9 +342,11 @@ UIView *zero;
 {
     NSLog(@"4");
     [self resetNumBackgrounds];
-    four.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //four.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     four.layer.borderWidth = 0;
+    [four.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    four.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -337,9 +354,11 @@ UIView *zero;
 {
     NSLog(@"5");
     [self resetNumBackgrounds];
-    five.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //five.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     five.layer.borderWidth = 0;
+    [five.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    five.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -347,9 +366,11 @@ UIView *zero;
 {
     NSLog(@"6");
     [self resetNumBackgrounds];
-    six.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //six.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     six.layer.borderWidth = 0;
+    [six.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    six.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -357,9 +378,11 @@ UIView *zero;
 {
     NSLog(@"7");
     [self resetNumBackgrounds];
-    seven.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //seven.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     seven.layer.borderWidth = 0;
+    [seven.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    seven.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -367,9 +390,11 @@ UIView *zero;
 {
     NSLog(@"8");
     [self resetNumBackgrounds];
-    eight.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //eight.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     eight.layer.borderWidth = 0;
+    [eight.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    eight.layer.borderWidth = 1;
     [self updateDots];
 }
 
@@ -377,9 +402,11 @@ UIView *zero;
 {
     NSLog(@"9");
     [self resetNumBackgrounds];
-    nine.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    //nine.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     nine.layer.borderWidth = 0;
+    [nine.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
+    nine.layer.borderWidth = 1;
     [self updateDots];
 }
 
