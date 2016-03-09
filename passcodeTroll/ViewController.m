@@ -22,6 +22,7 @@ float dotRadius;
 float emergencyCancelBuffer = 10;
 int numEntered; // 0, 1, 2, 3, or 4, for little dots to know how many to fill in
 
+UIView *dotsView;
 UIView *dot1;
 UIView *dot2;
 UIView *dot3;
@@ -85,7 +86,7 @@ UIView *zero;
     
     
     UILabel *cancel= [[UILabel alloc] initWithFrame:CGRectMake(cancelCenter-sw/6, sh-7*dotRadius, sw/3, 4*dotRadius)];
-    cancel.text = @"Cancel";
+    cancel.text = @"Delete";
     cancel.textColor = [UIColor whiteColor];
     cancel.textAlignment = NSTextAlignmentCenter;
     [cancel setFont:[UIFont fontWithName:myFont size:14]];
@@ -104,7 +105,8 @@ UIView *zero;
 
 - (void)loadDots
 {
-    UIView *dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
+    dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
+    
     int i = 0;
     float dotDist = (sw/3-8*dotRadius)/3;
     /*for (i = 0; i < 4; i++)
@@ -150,11 +152,29 @@ UIView *zero;
 
 - (void)updateDots // for filling in dots
 {
-    UIView *dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
-    int i = 0;
-    float dotDist = (sw/3-8*dotRadius)/3;
+    //UIView *dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
+    //int i = 0;
+    //float dotDist = (sw/3-8*dotRadius)/3;
     
-    if (numEntered == 1)
+    if (numEntered == 0) // acts as a reset for the dot fillings
+    {
+        dot1.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+        dot1.layer.borderWidth = 1;
+        dot1.backgroundColor = [UIColor clearColor];
+        
+        dot2.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+        dot2.layer.borderWidth = 1;
+        dot2.backgroundColor = [UIColor clearColor];
+        
+        dot3.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+        dot3.layer.borderWidth = 1;
+        dot3.backgroundColor = [UIColor clearColor];
+        
+        dot4.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+        dot4.layer.borderWidth = 1;
+        dot4.backgroundColor = [UIColor clearColor];
+    }
+    else if (numEntered == 1)
     {
         dot1.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
         dot1.layer.borderWidth = 0;
@@ -173,12 +193,85 @@ UIView *zero;
     {
         dot4.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
         dot4.layer.borderWidth = 0;
+        [self passcodeIsWrong];
     }
+    else
+    {
+        NSLog(@"should never happen");
+    }
+}
+
+- (void)passcodeIsWrong
+{
+    // shake dots
+    CABasicAnimation *animation =
+    [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setDuration:0.075];
+    [animation setRepeatCount:3];
+    [animation setAutoreverses:YES];
+    [animation setFromValue:[NSValue valueWithCGPoint:
+                             CGPointMake([dotsView center].x - 30.0f, [dotsView center].y)]];
+    [animation setToValue:[NSValue valueWithCGPoint:
+                           CGPointMake([dotsView center].x + 30.0f, [dotsView center].y)]];
+    [[dotsView layer] addAnimation:animation forKey:@"position"];
+    
+    // reset number backgrounds
+    [self resetNumBackgrounds];
+    
+    // reset dot backgrounds
+    numEntered = 0;
+    [self updateDots];
+
+}
+
+- (void)resetNumBackgrounds
+{
+    zero.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    zero.layer.borderWidth = 1;
+    zero.backgroundColor = [UIColor clearColor];
+    
+    one.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    one.layer.borderWidth = 1;
+    one.backgroundColor = [UIColor clearColor];
+    
+    two.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    two.layer.borderWidth = 1;
+    two.backgroundColor = [UIColor clearColor];
+    
+    three.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    three.layer.borderWidth = 1;
+    three.backgroundColor = [UIColor clearColor];
+    
+    four.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    four.layer.borderWidth = 1;
+    four.backgroundColor = [UIColor clearColor];
+    
+    five.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    five.layer.borderWidth = 1;
+    five.backgroundColor = [UIColor clearColor];
+    
+    six.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    six.layer.borderWidth = 1;
+    six.backgroundColor = [UIColor clearColor];
+    
+    seven.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    seven.layer.borderWidth = 1;
+    seven.backgroundColor = [UIColor clearColor];
+    
+    eight.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    eight.layer.borderWidth = 1;
+    eight.backgroundColor = [UIColor clearColor];
+    
+    nine.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    nine.layer.borderWidth = 1;
+    nine.backgroundColor = [UIColor clearColor];
+
 }
 
 - (void)tapAction0:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"0");
+    [self resetNumBackgrounds];
     zero.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     zero.layer.borderWidth = 0;
     numEntered++;
@@ -188,6 +281,7 @@ UIView *zero;
 - (void)tapAction1:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"1");
+    [self resetNumBackgrounds];
     one.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     one.layer.borderWidth = 0;
     numEntered++;
@@ -197,6 +291,7 @@ UIView *zero;
 - (void)tapAction2:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"2");
+    [self resetNumBackgrounds];
     two.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     two.layer.borderWidth = 0;
     numEntered++;
@@ -206,6 +301,7 @@ UIView *zero;
 - (void)tapAction3:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"3");
+    [self resetNumBackgrounds];
     three.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     three.layer.borderWidth = 0;
     numEntered++;
@@ -215,6 +311,7 @@ UIView *zero;
 - (void)tapAction4:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"4");
+    [self resetNumBackgrounds];
     four.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     four.layer.borderWidth = 0;
     numEntered++;
@@ -224,6 +321,7 @@ UIView *zero;
 - (void)tapAction5:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"5");
+    [self resetNumBackgrounds];
     five.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     five.layer.borderWidth = 0;
     numEntered++;
@@ -233,6 +331,7 @@ UIView *zero;
 - (void)tapAction6:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"6");
+    [self resetNumBackgrounds];
     six.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     six.layer.borderWidth = 0;
     numEntered++;
@@ -242,6 +341,7 @@ UIView *zero;
 - (void)tapAction7:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"7");
+    [self resetNumBackgrounds];
     seven.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     seven.layer.borderWidth = 0;
     numEntered++;
@@ -251,6 +351,7 @@ UIView *zero;
 - (void)tapAction8:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"8");
+    [self resetNumBackgrounds];
     eight.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     eight.layer.borderWidth = 0;
     numEntered++;
@@ -260,6 +361,7 @@ UIView *zero;
 - (void)tapAction9:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"9");
+    [self resetNumBackgrounds];
     nine.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     nine.layer.borderWidth = 0;
     numEntered++;
@@ -269,10 +371,10 @@ UIView *zero;
 
 - (void)loadKeypad
 {
-    int i = 0;
-    int j = 0;
+   // int i = 0;
+   // int j = 0;
     int count = 1;
-    float a = (2*buttonRadius+buttonDist);
+   // float a = (2*buttonRadius+buttonDist);
     
     /*
     for (i = 0; i < 3; i++)
