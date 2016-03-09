@@ -61,8 +61,6 @@ float emergencyCancelBuffer = 10;
     emergency.textColor = [UIColor whiteColor];
     emergency.textAlignment = NSTextAlignmentCenter;
     [emergency setFont:[UIFont fontWithName:myFont size:14]];
-    //emergency.adjustsFontSizeToFitWidth = YES;
-    //emergency.numberOfLines = 1;
     [self.view addSubview:emergency];
     
     
@@ -71,8 +69,6 @@ float emergencyCancelBuffer = 10;
     cancel.textColor = [UIColor whiteColor];
     cancel.textAlignment = NSTextAlignmentCenter;
     [cancel setFont:[UIFont fontWithName:myFont size:14]];
-    //emergency.adjustsFontSizeToFitWidth = YES;
-    //emergency.numberOfLines = 1;
     [self.view addSubview:cancel];
 }
 
@@ -83,8 +79,6 @@ float emergencyCancelBuffer = 10;
     epLabel.textColor = [UIColor whiteColor];
     epLabel.textAlignment = NSTextAlignmentCenter;
     [epLabel setFont:[UIFont fontWithName:myFont size:15]];
-    //epLabel.adjustsFontSizeToFitWidth = YES;
-    //epLabel.numberOfLines = 1;
     [self.view addSubview:epLabel];
 }
 
@@ -106,18 +100,43 @@ float emergencyCancelBuffer = 10;
 
 - (void)loadKeypad
 {
-    UIView *one = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-(2*buttonRadius+buttonDist), sh*.23, 2*buttonRadius, 2*buttonRadius)];
-    one.layer.cornerRadius = buttonRadius;
-    one.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
-    one.layer.borderWidth = 1;
-    UILabel *oneLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
-    oneLabel.text = @"1";
-    oneLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
-    [oneLabel setFont:[UIFont fontWithName:myFont size:32]];
-    oneLabel.textAlignment = NSTextAlignmentCenter;
-    [one addSubview:oneLabel];
-    [self.view addSubview:one];
+    int i = 0;
+    int j = 0;
+    int count = 1;
+    float a = (2*buttonRadius+buttonDist);
     
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            UIView *one = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-a + j*a, sh*.23 + i*a, 2*buttonRadius, 2*buttonRadius)];
+                one.layer.cornerRadius = buttonRadius;
+                one.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+            one.layer.borderWidth = 1;
+            UILabel *oneLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
+            oneLabel.text = [NSString stringWithFormat:@"%i", count];
+            count++;
+            oneLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+            [oneLabel setFont:[UIFont fontWithName:myFont size:32]];
+            oneLabel.textAlignment = NSTextAlignmentCenter;
+            [one addSubview:oneLabel];
+            [self.view addSubview:one];
+        }
+    }
+    
+    UIView *zero = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+3*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    zero.layer.cornerRadius = buttonRadius;
+    zero.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    zero.layer.borderWidth = 1;
+    UILabel *zeroLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
+    zeroLabel.text = @"0";
+    zeroLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+    [zeroLabel setFont:[UIFont fontWithName:myFont size:32]];
+    zeroLabel.textAlignment = NSTextAlignmentCenter;
+    [zero addSubview:zeroLabel];
+    [self.view addSubview:zero];
+    
+    /*
     UIView *two = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23, 2*buttonRadius, 2*buttonRadius)];
     two.layer.cornerRadius = buttonRadius;
     two.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
@@ -221,19 +240,9 @@ float emergencyCancelBuffer = 10;
     nineLabel.textAlignment = NSTextAlignmentCenter;
     [nine addSubview:nineLabel];
     [self.view addSubview:nine];
+ */
     
-    
-    UIView *zero = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+3*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
-    zero.layer.cornerRadius = buttonRadius;
-    zero.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
-    zero.layer.borderWidth = 1;
-    UILabel *zeroLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
-    zeroLabel.text = @"0";
-    zeroLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
-    [zeroLabel setFont:[UIFont fontWithName:myFont size:32]];
-    zeroLabel.textAlignment = NSTextAlignmentCenter;
-    [zero addSubview:zeroLabel];
-    [self.view addSubview:zero];
+
 }
 
 
