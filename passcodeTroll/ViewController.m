@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <UIKit/UIKit.h>
 
 @interface ViewController ()
 
@@ -19,6 +20,12 @@ float buttonRadius;
 float buttonDist;
 float dotRadius;
 float emergencyCancelBuffer = 10;
+int numEntered; // 0, 1, 2, 3, or 4, for little dots to know how many to fill in
+
+UIView *dot1;
+UIView *dot2;
+UIView *dot3;
+UIView *dot4;
 
 @implementation ViewController
 
@@ -31,6 +38,7 @@ float emergencyCancelBuffer = 10;
     buttonRadius = 35;
     buttonDist = 20;
     dotRadius = 6;
+    numEntered = 0;
     
     [self setNeedsStatusBarAppearanceUpdate];
     [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:.2 alpha:.65]];
@@ -87,7 +95,7 @@ float emergencyCancelBuffer = 10;
     UIView *dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
     int i = 0;
     float dotDist = (sw/3-8*dotRadius)/3;
-    for (i = 0; i < 4; i++)
+    /*for (i = 0; i < 4; i++)
     {
         UIView *dot = [[UIView alloc] initWithFrame:CGRectMake(i*(2*dotRadius+dotDist), 0, 2*dotRadius, 2*dotRadius)];
         dot.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
@@ -95,9 +103,74 @@ float emergencyCancelBuffer = 10;
         dot.layer.cornerRadius = dotRadius;
         [dotsView addSubview:dot];
     }
+     */
+    i=0;
+    dot1 = [[UIView alloc] initWithFrame:CGRectMake(i*(2*dotRadius+dotDist), 0, 2*dotRadius, 2*dotRadius)];
+    dot1.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    dot1.layer.borderWidth = 1;
+    dot1.layer.cornerRadius = dotRadius;
+    [dotsView addSubview:dot1];
+    
+    i=1;
+    dot2 = [[UIView alloc] initWithFrame:CGRectMake(i*(2*dotRadius+dotDist), 0, 2*dotRadius, 2*dotRadius)];
+    dot2.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    dot2.layer.borderWidth = 1;
+    dot2.layer.cornerRadius = dotRadius;
+    [dotsView addSubview:dot2];
+    
+    i=2;
+    dot3 = [[UIView alloc] initWithFrame:CGRectMake(i*(2*dotRadius+dotDist), 0, 2*dotRadius, 2*dotRadius)];
+    dot3.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    dot3.layer.borderWidth = 1;
+    dot3.layer.cornerRadius = dotRadius;
+    [dotsView addSubview:dot3];
+    
+    i=3;
+    dot4 = [[UIView alloc] initWithFrame:CGRectMake(i*(2*dotRadius+dotDist), 0, 2*dotRadius, 2*dotRadius)];
+    dot4.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
+    dot4.layer.borderWidth = 1;
+    dot4.layer.cornerRadius = dotRadius;
+    [dotsView addSubview:dot4];
+    
+    
     [self.view addSubview:dotsView];
 }
 
+- (void)updateDots // for filling in dots
+{
+    UIView *dotsView = [[UIView alloc] initWithFrame:CGRectMake(sw/3, sh*.16, sw/3, dotRadius+1)];
+    int i = 0;
+    float dotDist = (sw/3-8*dotRadius)/3;
+    
+    if (numEntered == 1)
+    {
+        dot1.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+        dot1.layer.borderWidth = 0;
+    }
+    else if (numEntered == 2)
+    {
+        dot2.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+        dot2.layer.borderWidth = 0;
+    }
+    else if (numEntered == 3)
+    {
+        dot3.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+        dot3.layer.borderWidth = 0;
+    }
+    else if (numEntered == 4)
+    {
+        dot4.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
+        dot4.layer.borderWidth = 0;
+    }
+git a
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)gesture
+{
+    NSLog(@"%ld", (long)[gesture view].tag);
+    numEntered++;
+    [self updateDots];
+}
 - (void)loadKeypad
 {
     int i = 0;
@@ -105,16 +178,21 @@ float emergencyCancelBuffer = 10;
     int count = 1;
     float a = (2*buttonRadius+buttonDist);
     
+    
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
         {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
             UIView *one = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius-a + j*a, sh*.23 + i*a, 2*buttonRadius, 2*buttonRadius)];
                 one.layer.cornerRadius = buttonRadius;
                 one.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
             one.layer.borderWidth = 1;
             UILabel *oneLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonRadius*.5, buttonRadius*.5, buttonRadius, buttonRadius)];
             oneLabel.text = [NSString stringWithFormat:@"%i", count];
+            one.tag = count;
+            one.userInteractionEnabled = YES;
+            [one addGestureRecognizer:tap];
             count++;
             oneLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
             [oneLabel setFont:[UIFont fontWithName:myFont size:32]];
@@ -124,7 +202,11 @@ float emergencyCancelBuffer = 10;
         }
     }
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     UIView *zero = [[UIView alloc] initWithFrame:CGRectMake(sw*.5-buttonRadius, sh*.23+3*(2*buttonRadius+buttonDist), 2*buttonRadius, 2*buttonRadius)];
+    zero.tag = 0;
+    zero.userInteractionEnabled = YES;
+    [zero addGestureRecognizer:tap];
     zero.layer.cornerRadius = buttonRadius;
     zero.layer.borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
     zero.layer.borderWidth = 1;
