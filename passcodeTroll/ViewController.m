@@ -56,7 +56,7 @@ CABasicAnimation *fade;
     numEntered = 0;
     
     [self setNeedsStatusBarAppearanceUpdate];
-    [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:.2 alpha:.65]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.65]];
     
     fade = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
     fade.fromValue = (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:.65].CGColor;
@@ -296,7 +296,7 @@ CABasicAnimation *fade;
     [self resetNumBackgrounds];
     //zero.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.65];
     zero.layer.borderWidth = 0;
-    [one.layer addAnimation:fade forKey:@"fadeAnimation"];
+    [zero.layer addAnimation:fade forKey:@"fadeAnimation"];
     numEntered++;
     zero.layer.borderWidth = 1;
     [self updateDots];
